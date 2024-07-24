@@ -5,13 +5,17 @@
   height: 100vh;
   background: linear-gradient(
     135deg,
-    rgba(24, 193, 195, 1) 0%,
+    rgb(24, 193, 195) 0%,
     rgba(253, 187, 45, 1) 100%
   );
 
   .login-container {
-    width: 400px;
-    // margin: 0 auto;
+    @media (min-width: 576px) {
+      width: 400px;
+    }
+
+    width: 300px;
+    height: 420px;
     background-color: #fff;
     border-radius: 12px;
 
@@ -28,8 +32,24 @@
       .login-input {
         margin: 8px 0;
 
+        .custom-input-password {
+          position: relative;
+
+          i {
+            position: absolute;
+            right: 14px;
+            top: 10px;
+            cursor: pointer;
+          }
+        }
+
         .text-label {
           margin-bottom: 4px;
+        }
+
+        .form-control:focus {
+          border-color: #18c1c3;
+          box-shadow: 0 0 5px rgba(29, 197, 200, 0.5); /* Hiệu ứng đổ bóng khi focus */
         }
       }
 
