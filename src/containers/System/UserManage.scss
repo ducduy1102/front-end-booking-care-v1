@@ -1,0 +1,18 @@
+.table-user {
+  .btn-edit,
+  .btn-delete {
+    width: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .btn-edit {
+    color: orange;
+  }
+
+  .btn-delete {
+    color: red;
+  }
+}
