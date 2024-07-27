@@ -1,3 +1,22 @@
+.modal-user-container {
+  .modal-content {
+    .modal-header {
+      display: flex;
+      align-items: center;
+      button {
+        font-size: 25px;
+        color: white;
+        border: none;
+        background: transparent;
+      }
+    }
+  }
+}
+
+.btn {
+  border: none !important;
+}
+
 .table-user {
   .btn-edit,
   .btn-delete {
@@ -15,4 +34,10 @@
   .btn-delete {
     color: red;
   }
+}
+
+.btn-add-new {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

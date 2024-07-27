@@ -2,30 +2,59 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./UserManage.scss";
-import { getALLUsers } from "../../services/userService";
+import { getAllUsers, createNewUserService } from "../../services/userService";
+import ModalUser from "./ModalUser";
 
 class UserManage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       arrUsers: [],
+      isOpenModalUser: false,
     };
   }
 
   async componentDidMount() {
-    let res = await getALLUsers("ALL");
+    await this.getAllUsers();
+  }
+
+  getAllUsers = async () => {
+    let res = await getAllUsers("ALL");
     console.log("all user", res);
     if (res && res.errCode === 0) {
-      this.setState(
-        {
-          arrUsers: res.users,
-        },
-        () => {
-          console.log(this.state.arrUsers);
-        }
-      );
+      this.setState({
+        arrUsers: res.users,
+      });
     }
-  }
+  };
+
+  handleAddNewUser = () => {
+    this.setState({
+      isOpenModalUser: true,
+    });
+  };
+
+  toggleUserModal = () => {
+    this.setState({
+      isOpenModalUser: !this.state.isOpenModalUser,
+    });
+  };
+
+  createNewUser = async (data) => {
+    try {
+      const res = await createNewUserService(data);
+      if (res && res.errCode !== 0) {
+        alert(res.message);
+      } else {
+        await this.getAllUsers();
+        this.setState({
+          isOpenModalUser: false,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   /**
    * Life cycle react
    * Run component:
@@ -35,59 +64,83 @@ class UserManage extends Component {
    * @returns
    */
   render() {
-    console.log("check render", this.state);
+    // console.log("check render", this.state);
     let arrUsers = this.state.arrUsers;
     return (
       <div className="users-container">
-        <div className="text-center title">Manage Users</div>
-        <div className="users-table">
-          <div className="container">
-            <div className="row">
-              <div className="mt-3 table-user">
-                {/* <h3>Table users</h3> */}
-                <table className="table table-hover table-bordered">
-                  <thead>
-                    <tr>
-                      <th scope="col">ID</th>
-                      <th>Email</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Address</th>
-                      <th>Gender</th>
-                      <th>Phone Number</th>
-                      <th>RoleId</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {arrUsers &&
-                      arrUsers.length > 0 &&
-                      arrUsers.map((item, index) => {
-                        return (
-                          <tr key={`user-${index}`}>
-                            <th scope="row">{item.id}</th>
-                            <td> {item.email} </td>
-                            <td> {item.firstName} </td>
-                            <td> {item.lastName} </td>
-                            <td> {item.address} </td>
-                            <td> {item.gender}</td>
-                            <td> {item.phoneNumber} </td>
-                            <td> {item.roleId} </td>
-                            <td>
-                              <button className="btn-edit">
-                                <i class="fas fa-edit"></i>
-                              </button>
-                              <button type="submit" className="btn-delete">
-                                <i class="fas fa-trash-alt"></i>
-                              </button>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                  </tbody>
-                </table>
-              </div>
+        <div className="container">
+          <ModalUser
+            isOpen={this.state.isOpenModalUser}
+            toggleUserModal={this.toggleUserModal}
+            createNewUser={this.createNewUser}
+          />
+          <div className="text-center title">Manage Users</div>
+          <div className="mx-1">
+            <button
+              className="btn btn-primary btn-add-new"
+              onClick={() => this.handleAddNewUser()}
+            >
+              <i className="fa fa-plus-circle "></i> Add new user
+            </button>
+          </div>
+          <div className="users-content">
+            <div className="mt-3 table-user">
+              <table className="table table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th>Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                    <th>Gender</th>
+                    <th>Phone Number</th>
+                    <th>RoleId</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {arrUsers && arrUsers.length > 0 ? (
+                    arrUsers.map((item, index) => {
+                      return (
+                        <tr key={`user-${index}`}>
+                          <th scope="row">{item.id}</th>
+                          <td> {item.email} </td>
+                          <td> {item.firstName} </td>
+                          <td> {item.lastName} </td>
+                          <td> {item.address} </td>
+                          <td> {item.gender}</td>
+                          <td> {item.phoneNumber} </td>
+                          <td> {item.roleId} </td>
+                          <td>
+                            <button className="btn-edit">
+                              <i className="fas fa-edit"></i>
+                            </button>
+                            <button type="submit" className="btn-delete">
+                              <i className="fas fa-trash-alt"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <>
+                      <tr>
+                        <td colSpan={9} className="text-center">
+                          Not found users
+                        </td>
+                      </tr>
+                    </>
+                  )}
+                </tbody>
+              </table>
             </div>
+            {/* <ModalUser
+        onHide={onHideModalUser}
+        show={isShowModalUser}
+        action={actionModalUser}
+        dataModalUser={dataModalUser}
+      /> */}
           </div>
         </div>
       </div>
