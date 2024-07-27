@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { emitter } from "../../utils/emitter";
 
 class ModalUser extends Component {
   constructor(props) {
@@ -16,6 +17,23 @@ class ModalUser extends Component {
       gender: "",
       roleId: "",
     };
+
+    this.listenToEmitter();
+  }
+
+  listenToEmitter() {
+    emitter.on("EVENT_CLEAR_MODAL_DATA", () => {
+      this.setState({
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        address: "",
+        phoneNumber: "",
+        gender: "",
+        roleId: "",
+      });
+    });
   }
 
   toggle = () => {
@@ -56,10 +74,12 @@ class ModalUser extends Component {
       // call api create model
       this.props.createNewUser(this.state);
     }
-    console.log("data", this.state);
+    // console.log("data", this.state);
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log("mouting modal");
+  }
 
   render() {
     return (
@@ -155,9 +175,7 @@ class ModalUser extends Component {
                 />
               </div>
               <div className="form-group col-sm-3">
-                <label htmlFor="phoneNumber" className="form-label">
-                  Sex
-                </label>
+                <label className="form-label">Sex</label>
                 <select
                   className="form-select"
                   name="gender"
@@ -169,9 +187,7 @@ class ModalUser extends Component {
                 </select>
               </div>
               <div className="form-group col-sm-3">
-                <label htmlFor="phoneNumber" className="form-label">
-                  Role
-                </label>
+                <label className="form-label">Role</label>
                 <select
                   className="form-select"
                   value={this.state.roleId}
