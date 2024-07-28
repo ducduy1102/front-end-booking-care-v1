@@ -112,6 +112,7 @@ class ModalEditUser extends Component {
                 <input
                   type="password"
                   className="form-control"
+                  placeholder="*********"
                   id="password"
                   name="password"
                   disabled
