@@ -6,9 +6,11 @@ import {
   getAllUsers,
   createNewUserService,
   deleteUserService,
+  editUserService,
 } from "../../services/userService";
 import ModalUser from "./ModalUser";
 import { emitter } from "../../utils/emitter";
+import ModalEditUser from "./ModalEditUser";
 
 class UserManage extends Component {
   constructor(props) {
@@ -16,6 +18,8 @@ class UserManage extends Component {
     this.state = {
       arrUsers: [],
       isOpenModalUser: false,
+      isOpenModalEditUser: false,
+      userEdit: {},
     };
   }
 
@@ -45,6 +49,12 @@ class UserManage extends Component {
     });
   };
 
+  toggleUserEditModal = () => {
+    this.setState({
+      isOpenModalEditUser: !this.state.isOpenModalEditUser,
+    });
+  };
+
   createNewUser = async (data) => {
     try {
       const res = await createNewUserService(data);
@@ -56,6 +66,32 @@ class UserManage extends Component {
           isOpenModalUser: false,
         });
         emitter.emit("EVENT_CLEAR_MODAL_DATA");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  handleEditUser = (user) => {
+    console.log("check edit user", user);
+    this.setState({
+      isOpenModalEditUser: true,
+      userEdit: user,
+    });
+  };
+
+  doEditUser = async (user) => {
+    // console.log("click edit", user);
+    try {
+      let res = await editUserService(user);
+      // console.log("res", res);
+      if (res && res.errCode !== 0) {
+        alert(res.message);
+      } else {
+        this.setState({
+          isOpenModalEditUser: false,
+        });
+        this.getAllUsers();
       }
     } catch (error) {
       console.log(error);
@@ -93,6 +129,14 @@ class UserManage extends Component {
             toggleUserModal={this.toggleUserModal}
             createNewUser={this.createNewUser}
           />
+          {this.state.isOpenModalEditUser && (
+            <ModalEditUser
+              isOpen={this.state.isOpenModalEditUser}
+              toggleUserModal={this.toggleUserEditModal}
+              currentUser={this.state.userEdit}
+              editUser={this.doEditUser}
+            />
+          )}
           <div className="text-center title">Manage Users</div>
           <div className="mx-1">
             <button
@@ -124,15 +168,25 @@ class UserManage extends Component {
                       return (
                         <tr key={`user-${index}`}>
                           <th scope="row">{item.id}</th>
-                          <td> {item.email} </td>
-                          <td> {item.firstName} </td>
-                          <td> {item.lastName} </td>
-                          <td> {item.address} </td>
-                          <td> {item.gender}</td>
-                          <td> {item.phoneNumber} </td>
-                          <td> {item.roleId} </td>
+                          <td>{item.email}</td>
+                          <td>{item.firstName}</td>
+                          <td>{item.lastName}</td>
+                          <td>{item.address}</td>
+                          <td>{item.gender === 1 ? "Male" : "Female"}</td>
+                          <td>{item.phoneNumber} </td>
                           <td>
-                            <button className="btn-edit">
+                            {" "}
+                            {+item.roleId === 1
+                              ? "Admin"
+                              : +item.roleId === 2
+                              ? "Doctor"
+                              : "Patient"}
+                          </td>
+                          <td>
+                            <button
+                              className="btn-edit"
+                              onClick={() => this.handleEditUser(item)}
+                            >
                               <i className="fas fa-edit"></i>
                             </button>
                             <button
