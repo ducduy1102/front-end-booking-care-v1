@@ -64,26 +64,57 @@ input {
       gap: 10px;
 
       .support {
-        padding-right: 50px;
+        padding-right: 20px;
         display: flex;
         align-items: center;
         cursor: pointer;
 
         i {
+          color: var(--primary-color);
           font-size: 15px;
           margin-right: 5px;
         }
       }
 
-      .language-vi {
+      .language-vi,
+      .language-en {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0.15;
+        padding: 5px;
+
         &.active {
+          opacity: 1;
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+        .img-vi,
+        .img-en {
+          width: 20px;
+          height: 20px;
+        }
+
+        .text-vi,
+        .text-en {
+          padding: 0 3px;
+        }
+      }
+
+      .language-vi {
+        &.active,
+        &:hover {
           color: orange;
         }
       }
 
       .language-en {
         margin: 0 10px;
-        &.active {
+        &.active,
+        &:hover {
           color: blue;
         }
       }

@@ -4,10 +4,21 @@ import { connect } from "react-redux";
 import "./HomeHeader.scss";
 import logo from "../../assets/images/logo.svg";
 import { FormattedMessage } from "react-intl";
+import { LANGUAGES } from "../../utils";
+import { changeLanguageApp } from "../../store/actions";
+import viFlag from "../../assets/images/vietnam-flag.svg";
+import enFlag from "../../assets/images/en-flag.svg";
 
 class HomeHeader extends Component {
+  changeLanguage = (language) => {
+    // alert(language);
+    this.props.changeLanguageAppRedux(language);
+  };
+
   render() {
-    console.log("check props", this.props);
+    // console.log("check props", this.props);
+    let language = this.props.language;
+    // console.log("language", language);
     return (
       <>
         <div className=" home-header-container">
@@ -65,8 +76,42 @@ class HomeHeader extends Component {
                 <i className="fas fa-question-circle"></i>
                 <FormattedMessage id="home-header.support" />
               </div>
-              <div className="language-vi">VN</div>
-              <div className="language-en">EN</div>
+              <div
+                className={
+                  language === "vi" ? "language-vi active" : "language-vi"
+                }
+              >
+                <img
+                  src={viFlag}
+                  alt=""
+                  className="img-vi"
+                  onClick={() => this.changeLanguage(LANGUAGES.VI)}
+                />
+                <span
+                  className="text-vi"
+                  onClick={() => this.changeLanguage(LANGUAGES.VI)}
+                >
+                  VN
+                </span>
+              </div>
+              <div
+                className={
+                  language === "en" ? "language-en active" : "language-en"
+                }
+              >
+                <img
+                  src={enFlag}
+                  alt=""
+                  className="img-en"
+                  onClick={() => this.changeLanguage(LANGUAGES.EN)}
+                />
+                <span
+                  className="text-en"
+                  onClick={() => this.changeLanguage(LANGUAGES.EN)}
+                >
+                  EN
+                </span>
+              </div>
             </div>
           </div>
           <div className="home-header-banner">
@@ -130,7 +175,7 @@ class HomeHeader extends Component {
                 </div>
                 <div className="option-child">
                   <div className="icon-child">
-                    <i class="fas fa-briefcase-medical"></i>
+                    <i className="fas fa-briefcase-medical"></i>
                   </div>
                   <div className="text-child">
                     <FormattedMessage id="banner.dental" />
@@ -148,12 +193,14 @@ class HomeHeader extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
-    lang: state.app.language,
+    language: state.app.language,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
