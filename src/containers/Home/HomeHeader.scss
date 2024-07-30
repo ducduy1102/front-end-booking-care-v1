@@ -8,7 +8,6 @@ input {
   --secondary-color: #8adce3;
   --third-color: #edfffa;
 
-  height: 70px;
   width: 100%;
   padding-top: 10px;
 
@@ -17,8 +16,8 @@ input {
   }
 
   .home-header-content {
+    height: 70px;
     width: 100%;
-    height: 100%;
     display: flex;
 
     .left-content {
@@ -199,7 +198,7 @@ input {
         .option-child {
           color: #fff;
           width: 128px;
-          height: 100px;
+          height: 95px;
           text-align: center;
 
           .icon-child {
@@ -220,12 +219,13 @@ input {
           }
 
           .text-child {
+            margin-top: 4px;
             font-style: 16px;
             font-weight: 600;
             text-transform: capitalize;
 
             &:hover {
-              color: #333;
+              color: var(--secondary-color);
               cursor: pointer;
             }
           }
