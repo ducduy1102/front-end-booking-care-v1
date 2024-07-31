@@ -13,12 +13,10 @@ import { FormattedMessage } from "react-intl";
 
 class Header extends Component {
   changeLanguage = (language) => {
-    // alert(language);
     this.props.changeLanguageAppRedux(language);
   };
   render() {
     const { processLogout, language, userInfo } = this.props;
-    console.log("check user info:  ", userInfo);
 
     return (
       <div className="header-container">
