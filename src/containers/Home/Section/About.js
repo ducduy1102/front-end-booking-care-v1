@@ -18,10 +18,10 @@ class About extends Component {
                 height="400"
                 src="https://www.youtube.com/embed/MhQKe-aERsU"
                 title="Ed Sheeran - Shape Of You ( cover by J.Fla )"
-                frameborder="0"
+                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
               ></iframe>
             </div>
             <div className="content-right">
