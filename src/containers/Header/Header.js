@@ -5,10 +5,18 @@ import * as actions from "../../store/actions";
 import Navigator from "../../components/Navigator";
 import { adminMenu } from "./menuApp";
 import "./Header.scss";
+import { LANGUAGES } from "../../utils";
+import { changeLanguageApp } from "../../store/actions";
+import viFlag from "../../assets/images/vietnam-flag.svg";
+import enFlag from "../../assets/images/en-flag.svg";
 
 class Header extends Component {
+  changeLanguage = (language) => {
+    // alert(language);
+    this.props.changeLanguageAppRedux(language);
+  };
   render() {
-    const { processLogout } = this.props;
+    const { processLogout, language } = this.props;
 
     return (
       <div className="header-container">
@@ -17,9 +25,47 @@ class Header extends Component {
           <Navigator menus={adminMenu} />
         </div>
 
-        {/* nút logout */}
-        <div className="btn btn-logout" onClick={processLogout}>
-          <i className="fas fa-sign-out-alt"></i>
+        <div className="languages">
+          <div
+            className={language === "vi" ? "language-vi active" : "language-vi"}
+          >
+            <img
+              src={viFlag}
+              alt=""
+              className="img-vi"
+              onClick={() => this.changeLanguage(LANGUAGES.VI)}
+            />
+            <span
+              className="text-vi"
+              onClick={() => this.changeLanguage(LANGUAGES.VI)}
+            >
+              VN
+            </span>
+          </div>
+          <div
+            className={language === "en" ? "language-en active" : "language-en"}
+          >
+            <img
+              src={enFlag}
+              alt=""
+              className="img-en"
+              onClick={() => this.changeLanguage(LANGUAGES.EN)}
+            />
+            <span
+              className="text-en"
+              onClick={() => this.changeLanguage(LANGUAGES.EN)}
+            >
+              EN
+            </span>
+          </div>
+          {/* nút logout */}
+          <div
+            className="btn btn-logout"
+            onClick={processLogout}
+            title="Log out"
+          >
+            <i className="fas fa-sign-out-alt"></i>
+          </div>
         </div>
       </div>
     );
@@ -29,12 +75,14 @@ class Header extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
+    language: state.app.language,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     processLogout: () => dispatch(actions.processLogout()),
+    changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
   };
 };
 
