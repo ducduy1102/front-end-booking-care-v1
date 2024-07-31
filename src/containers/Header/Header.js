@@ -9,6 +9,7 @@ import { LANGUAGES } from "../../utils";
 import { changeLanguageApp } from "../../store/actions";
 import viFlag from "../../assets/images/vietnam-flag.svg";
 import enFlag from "../../assets/images/en-flag.svg";
+import { FormattedMessage } from "react-intl";
 
 class Header extends Component {
   changeLanguage = (language) => {
@@ -16,7 +17,8 @@ class Header extends Component {
     this.props.changeLanguageAppRedux(language);
   };
   render() {
-    const { processLogout, language } = this.props;
+    const { processLogout, language, userInfo } = this.props;
+    console.log("check user info:  ", userInfo);
 
     return (
       <div className="header-container">
@@ -26,6 +28,10 @@ class Header extends Component {
         </div>
 
         <div className="languages">
+          <span className="welcome">
+            <FormattedMessage id="home-header.welcome" />,{" "}
+            {userInfo?.firstName ? userInfo.firstName : "User"} !
+          </span>
           <div
             className={language === "vi" ? "language-vi active" : "language-vi"}
           >
@@ -75,6 +81,7 @@ class Header extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
+    userInfo: state.user.userInfo,
     language: state.app.language,
   };
 };
