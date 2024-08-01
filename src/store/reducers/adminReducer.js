@@ -1,6 +1,7 @@
 import actionTypes from "../actions/actionTypes";
 
 const initialState = {
+  isLoading: false,
   genders: [],
   roles: [],
   positions: [],
@@ -9,20 +10,59 @@ const initialState = {
 const adminReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_GENDER_START:
-      console.log("fire fetch gender start", action);
+      state.isLoading = true;
+      // console.log("fire fetch gender start", action);
       return {
         ...state,
       };
     case actionTypes.FETCH_GENDER_SUCCESS:
-      let copyState = { ...state };
-      copyState.genders = action.data;
-      console.log("fire fetch gender success", copyState);
+      state.genders = action.data;
+      state.isLoading = false;
+      // console.log("fire fetch gender success", state);
 
       return {
-        ...copyState,
+        ...state,
       };
     case actionTypes.FETCH_GENDER_FAILED:
-      console.log("fire fetch gender failed", action);
+      state.isLoading = false;
+      state.genders = [];
+      // console.log("fire fetch gender failed", action);
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_POSITION_START:
+      state.isLoading = true;
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_POSITION_SUCCESS:
+      state.positions = action.data;
+      state.isLoading = false;
+
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_POSITION_FAILED:
+      state.isLoading = false;
+      state.positions = [];
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_ROLE_START:
+      state.isLoading = true;
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_ROLE_SUCCESS:
+      state.roles = action.data;
+      state.isLoading = false;
+
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_ROLE_FAILED:
+      state.isLoading = false;
+      state.roles = [];
       return {
         ...state,
       };
