@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as actions from "../../store/actions";
+// import * as actions from "../../store/actions";
 import Navigator from "../../components/Navigator";
 import { adminMenu } from "./menuApp";
 import "./Header.scss";
 import { LANGUAGES } from "../../utils";
-import { changeLanguageApp } from "../../store/actions";
+import { processLogout, changeLanguageApp } from "../../store/actions";
 import viFlag from "../../assets/images/vietnam-flag.svg";
 import enFlag from "../../assets/images/en-flag.svg";
 import { FormattedMessage } from "react-intl";
@@ -86,7 +86,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    processLogout: () => dispatch(actions.processLogout()),
+    processLogout: () => dispatch(processLogout()),
     changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
   };
 };
