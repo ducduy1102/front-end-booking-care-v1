@@ -158,7 +158,8 @@ class UserManage extends Component {
                     <th>Address</th>
                     <th>Gender</th>
                     <th>Phone Number</th>
-                    <th>RoleId</th>
+                    <th>Role</th>
+                    <th>Position</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -175,13 +176,13 @@ class UserManage extends Component {
                           <td>{item.gender === 1 ? "Male" : "Female"}</td>
                           <td>{item.phoneNumber} </td>
                           <td>
-                            {" "}
-                            {+item.roleId === 1
+                            {item.roleId === "R1"
                               ? "Admin"
-                              : +item.roleId === 2
+                              : item.roleId === "R2"
                               ? "Doctor"
                               : "Patient"}
                           </td>
+                          <td>{item.positionId} </td>
                           <td>
                             <button
                               className="btn-edit"

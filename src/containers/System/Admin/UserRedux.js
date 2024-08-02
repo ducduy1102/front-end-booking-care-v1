@@ -3,7 +3,8 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { LANGUAGES } from "../../../utils";
 import {
-  createNewUserStart,
+  createNewUser,
+  fetchAllUserStart,
   fetchGenderStart,
   fetchPositionStart,
   fetchRoleStart,
@@ -12,6 +13,7 @@ import "../UserManage.scss";
 import "./UserRedux.scss";
 import "react-image-lightbox/style.css";
 import Lightbox from "react-image-lightbox";
+import TableManageUser from "./TableManageUser";
 
 class UserRedux extends Component {
   constructor(props) {
@@ -42,6 +44,23 @@ class UserRedux extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.usersRedux !== this.props.usersRedux) {
+      const { genderArr, positionArr, roleArr } = this.state;
+
+      this.setState({
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        address: "",
+        phoneNumber: "",
+        gender: genderArr && genderArr.length > 0 ? genderArr[0].key : "",
+        position:
+          positionArr && positionArr.length > 0 ? positionArr[0].key : "",
+        role: roleArr && roleArr.length > 0 ? roleArr[0].key : "",
+        avatar: "",
+      });
+    }
     // component re-render => DidUpdate
     // so sánh hiện tại (this) và quá khứ (prev)
     // [3] vs []
@@ -115,7 +134,7 @@ class UserRedux extends Component {
     if (isValid === false) return;
 
     // fire redux action
-    this.props.createNewUserStart({
+    this.props.createNewUser({
       email: this.state.email,
       password: this.state.password,
       firstName: this.state.firstName,
@@ -345,7 +364,7 @@ class UserRedux extends Component {
                     ></div>
                   </div>
                 </div>
-                <div className="col-12">
+                <div className="my-3 col-12">
                   <button
                     type="submit"
                     className="btn btn-primary"
@@ -358,6 +377,8 @@ class UserRedux extends Component {
             </div>
           </div>
         </div>
+        <TableManageUser />
+
         {this.state.isOpen === true && (
           <Lightbox
             mainSrc={this.state.previewImgURL}
@@ -376,6 +397,7 @@ const mapStateToProps = (state) => {
     roleRedux: state.admin.roles,
     // isLoading: state.admin.isLoading,
     language: state.app.language,
+    usersRedux: state.admin.users,
   };
 };
 
@@ -384,7 +406,8 @@ const mapDispatchToProps = (dispatch) => {
     getGenderStart: () => dispatch(fetchGenderStart()),
     getPositionStart: () => dispatch(fetchPositionStart()),
     getRoleStart: () => dispatch(fetchRoleStart()),
-    createNewUserStart: (data) => dispatch(createNewUserStart(data)),
+    createNewUser: (data) => dispatch(createNewUser(data)),
+    fetchUsersRedux: () => dispatch(fetchAllUserStart()),
 
     // processLogout: () => dispatch(actions.processLogout()),
     // previewImgURLRedux: (language) => dispatch(changeLanguageApp(language)),

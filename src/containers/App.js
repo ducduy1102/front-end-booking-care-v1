@@ -4,7 +4,6 @@ import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter as Router } from "connected-react-router";
 import { history } from "../redux";
 import { ToastContainer } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
 
 import {
   userIsAuthenticated,
@@ -18,7 +17,7 @@ import Login from "./Auth/Login";
 import System from "../routes/System";
 
 import { CustomToastCloseButton } from "../components/CustomToast";
-import ConfirmModal from "../components/ConfirmModal";
+// import ConfirmModal from "../components/ConfirmModal";
 import "bootstrap/dist/css/bootstrap.css";
 import HomePage from "./Home/HomePage";
 import CustomScrollbars from "../components/CustomScrollbars";
@@ -64,7 +63,7 @@ class App extends Component {
               </CustomScrollbars>
             </div>
 
-            <ToastContainer
+            {/* <ToastContainer
               className="toast-container"
               toastClassName="toast-item"
               bodyClassName="toast-item-body"
@@ -75,7 +74,21 @@ class App extends Component {
               closeOnClick={false}
               draggable={false}
               closeButton={<CustomToastCloseButton />}
+            /> */}
+
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
             />
+            <ToastContainer />
 
             {/* <ToastContainer
               position="top-right"
