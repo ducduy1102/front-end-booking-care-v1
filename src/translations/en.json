@@ -58,6 +58,7 @@
     "position": "Position",
     "role": "Role",
     "avatar": "Avatar",
-    "save": "Save User"
+    "save": "Save User",
+    "upload-image": "Upload image"
   }
 }
