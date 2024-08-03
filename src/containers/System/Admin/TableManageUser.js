@@ -26,8 +26,9 @@ class TableManageUser extends Component {
     }
   }
 
-  handleEditUser = () => {
-    console.log("edit user");
+  handleEditUser = (user) => {
+    this.props.handleEditUserFromParentKey(user);
+    console.log("user edit", user);
   };
 
   handleDeleteUser = (user) => {
@@ -67,7 +68,13 @@ class TableManageUser extends Component {
                           <td>{item.firstName}</td>
                           <td>{item.lastName}</td>
                           <td>{item.address}</td>
-                          <td>{item.gender === 1 ? "Male" : "Female"}</td>
+                          <td>
+                            {item.gender === "M"
+                              ? "Male"
+                              : item.gender === "F"
+                              ? "Female"
+                              : "Other"}
+                          </td>
                           <td>{item.phoneNumber}</td>
                           <td>
                             {item.roleId === "R1"
@@ -80,7 +87,7 @@ class TableManageUser extends Component {
                           <td>
                             <button
                               className="btn-edit"
-                              //   onClick={() => this.handleEditUser(item)}
+                              onClick={() => this.handleEditUser(item)}
                             >
                               <i className="fas fa-edit"></i>
                             </button>

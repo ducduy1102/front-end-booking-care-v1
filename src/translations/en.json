@@ -48,6 +48,7 @@
 
   "manage-user": {
     "add": "Add a new user",
+    "edit": "Edit user",
     "email": "Email",
     "password": "Password",
     "first-name": "First Name",
