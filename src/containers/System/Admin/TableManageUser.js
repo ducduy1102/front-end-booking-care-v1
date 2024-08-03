@@ -3,6 +3,7 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./TableManageUser.scss";
 import { deleteUser, fetchAllUserStart } from "../../../store/actions";
+import { LANGUAGES } from "../../../utils";
 // import { emitter } from "../../utils/emitter";
 
 class TableManageUser extends Component {
@@ -47,20 +48,47 @@ class TableManageUser extends Component {
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
-                    <th>Email</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Address</th>
-                    <th>Gender</th>
-                    <th>Phone Number</th>
-                    <th>Role</th>
-                    <th>Position</th>
-                    <th>Actions</th>
+                    <th>
+                      <FormattedMessage id="manage-user.email" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="manage-user.first-name" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="manage-user.last-name" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="manage-user.address" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="manage-user.gender" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="manage-user.phone-number" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="manage-user.role" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="manage-user.position" />
+                    </th>
+                    <th>
+                      <FormattedMessage id="manage-user.actions" />
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {arrUsers && arrUsers.length > 0 ? (
                     arrUsers.map((item, index) => {
+                      const gender = this.props.genderRedux.find(
+                        (g) => g.key === item.gender
+                      );
+                      const position = this.props.positionRedux.find(
+                        (p) => p.key === item.positionId
+                      );
+                      const role = this.props.roleRedux.find(
+                        (r) => r.key === item.roleId
+                      );
                       return (
                         <tr key={`user-${index}`}>
                           <th scope="row">{item.id}</th>
@@ -69,21 +97,21 @@ class TableManageUser extends Component {
                           <td>{item.lastName}</td>
                           <td>{item.address}</td>
                           <td>
-                            {item.gender === "M"
-                              ? "Male"
-                              : item.gender === "F"
-                              ? "Female"
-                              : "Other"}
+                            {gender && this.props.language === LANGUAGES.VI
+                              ? gender.valueVi
+                              : gender.valueEn}
                           </td>
                           <td>{item.phoneNumber}</td>
                           <td>
-                            {item.roleId === "R1"
-                              ? "Admin"
-                              : item.roleId === "R2"
-                              ? "Doctor"
-                              : "Patient"}
+                            {role && this.props.language === LANGUAGES.VI
+                              ? role.valueVi
+                              : role.valueEn}
                           </td>
-                          <td>{item.positionId} </td>
+                          <td>
+                            {position && this.props.language === LANGUAGES.VI
+                              ? position.valueVi
+                              : position.valueEn}
+                          </td>
                           <td>
                             <button
                               className="btn-edit"
@@ -124,6 +152,10 @@ class TableManageUser extends Component {
 const mapStateToProps = (state) => {
   return {
     usersRedux: state.admin.users,
+    genderRedux: state.admin.genders,
+    positionRedux: state.admin.positions,
+    roleRedux: state.admin.roles,
+    language: state.app.language,
   };
 };
 

@@ -60,6 +60,7 @@
     "role": "Role",
     "avatar": "Avatar",
     "save": "Save User",
-    "upload-image": "Upload image"
+    "upload-image": "Upload image",
+    "actions": "Actions"
   }
 }
