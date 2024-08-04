@@ -9,6 +9,10 @@
   padding-right: 10px;
 }
 
+.slick-disabled {
+  display: none !important;
+}
+
 .slick-prev,
 .slick-next {
   height: 45px !important;
@@ -89,8 +93,8 @@ button {
 
         &.section-outstanding-doctor {
           border-radius: 50%;
-          width: 180px;
-          height: 180px;
+          width: 150px;
+          height: 150px;
           text-align: center;
           // background-image: url("../../assets/outstanding-doctor/bs-minions.jpg");
         }

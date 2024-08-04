@@ -13,7 +13,7 @@
   },
 
   "banner": {
-    "main-title": "Medical background",
+    "main-title": "Medical platform",
     "slogan": "Comprehensive health care",
     "specialty": "Specialized examination",
     "remote": "Remote examination",
@@ -62,5 +62,10 @@
     "save": "Save User",
     "upload-image": "Upload image",
     "actions": "Actions"
+  },
+
+  "homepage": {
+    "outstanding-doctor": "Doctor featured last week",
+    "more-info": "See more"
   }
 }
