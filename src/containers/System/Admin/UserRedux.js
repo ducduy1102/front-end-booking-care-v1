@@ -57,10 +57,10 @@ class UserRedux extends Component {
         lastName: "",
         address: "",
         phoneNumber: "",
-        gender: genderArr && genderArr.length > 0 ? genderArr[0].key : "",
+        gender: genderArr && genderArr.length > 0 ? genderArr[0].keyMap : "",
         position:
-          positionArr && positionArr.length > 0 ? positionArr[0].key : "",
-        role: roleArr && roleArr.length > 0 ? roleArr[0].key : "",
+          positionArr && positionArr.length > 0 ? positionArr[0].keyMap : "",
+        role: roleArr && roleArr.length > 0 ? roleArr[0].keyMap : "",
         avatar: "",
         action: CRUD_ACTIONS.CREATE,
         previewImgURL: "",
@@ -73,14 +73,14 @@ class UserRedux extends Component {
       let arrGenders = this.props.genderRedux;
       this.setState({
         genderArr: this.props.genderRedux,
-        gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].key : "",
+        gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : "",
       });
     }
     if (prevProps.roleRedux !== this.props.roleRedux) {
       let arrRoles = this.props.roleRedux;
       this.setState({
         roleArr: this.props.roleRedux,
-        role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : "",
+        role: arrRoles && arrRoles.length > 0 ? arrRoles[0].keyMap : "",
       });
     }
     if (prevProps.positionRedux !== this.props.positionRedux) {
@@ -88,7 +88,7 @@ class UserRedux extends Component {
       this.setState({
         positionArr: this.props.positionRedux,
         position:
-          arrPositions && arrPositions.length > 0 ? arrPositions[0].key : "",
+          arrPositions && arrPositions.length > 0 ? arrPositions[0].keyMap : "",
       });
     }
   }
@@ -98,7 +98,7 @@ class UserRedux extends Component {
     // console.log("objecturrl", objectUrl);
     if (file) {
       let base64 = await CommonUtils.getBase64(file);
-      console.log("base64 file image: ", base64);
+      // console.log("base64 file image: ", base64);
       let objectUrl = URL.createObjectURL(file);
       this.setState({
         previewImgURL: objectUrl,
@@ -342,7 +342,7 @@ class UserRedux extends Component {
                         genderArr.length > 0 &&
                         genderArr.map((item, index) => {
                           return (
-                            <option key={`gender-${index}`} value={item.key}>
+                            <option key={`gender-${index}`} value={item.keyMap}>
                               {language === LANGUAGES.VI
                                 ? item.valueVi
                                 : item.valueEn}
@@ -366,7 +366,10 @@ class UserRedux extends Component {
                         positionArr.length > 0 &&
                         positionArr.map((item, index) => {
                           return (
-                            <option key={`position-${index}`} value={item.key}>
+                            <option
+                              key={`position-${index}`}
+                              value={item.keyMap}
+                            >
                               {language === LANGUAGES.VI
                                 ? item.valueVi
                                 : item.valueEn}
@@ -390,7 +393,7 @@ class UserRedux extends Component {
                         roleArr.length > 0 &&
                         roleArr.map((item, index) => {
                           return (
-                            <option key={`role-${index}`} value={item.key}>
+                            <option key={`role-${index}`} value={item.keyMap}>
                               {language === LANGUAGES.VI
                                 ? item.valueVi
                                 : item.valueEn}

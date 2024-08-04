@@ -81,14 +81,15 @@ class TableManageUser extends Component {
                   {arrUsers && arrUsers.length > 0 ? (
                     arrUsers.map((item, index) => {
                       const gender = this.props.genderRedux.find(
-                        (g) => g.key === item.gender
+                        (g) => g.keyMap === item.gender
                       );
                       const position = this.props.positionRedux.find(
-                        (p) => p.key === item.positionId
+                        (p) => p.keyMap === item.positionId
                       );
                       const role = this.props.roleRedux.find(
-                        (r) => r.key === item.roleId
+                        (r) => r.keyMap === item.roleId
                       );
+
                       return (
                         <tr key={`user-${index}`}>
                           <th scope="row">{item.id}</th>

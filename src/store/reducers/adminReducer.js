@@ -6,6 +6,7 @@ const initialState = {
   roles: [],
   positions: [],
   users: [],
+  topDoctors: [],
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -69,20 +70,30 @@ const adminReducer = (state = initialState, action) => {
       };
     case actionTypes.FETCH_ALL_USER_START:
       state.isLoading = true;
-
       return {
         ...state,
       };
     case actionTypes.FETCH_ALL_USER_SUCCESS:
       state.users = action.users;
       state.isLoading = false;
-
       return {
         ...state,
       };
     case actionTypes.FETCH_ALL_USER_FAILED:
       state.isLoading = false;
       state.users = [];
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_TOP_DOCTOR_SUCCESS:
+      state.topDoctors = action.dataDoctors;
+      state.isLoading = false;
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_TOP_DOCTOR_FAILED:
+      state.isLoading = false;
+      state.topDoctors = [];
       return {
         ...state,
       };
