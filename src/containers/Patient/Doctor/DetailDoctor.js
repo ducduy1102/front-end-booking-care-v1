@@ -44,39 +44,38 @@ class DetailDoctor extends Component {
       <>
         <HomeHeader isShowBanner={false} />
         <div className="doctor-detail-container">
-          <div className="container">
-            <div className="intro-doctor">
-              <div
-                className="content-left"
-                style={{
-                  backgroundImage: `url(${
-                    detailDoctor?.image ? detailDoctor.image : ""
-                  })`,
-                }}
-              ></div>
-              <div className="content-right">
-                <div className="content-right-title">
-                  {language === LANGUAGES.VI ? nameVi : nameEn}
-                </div>
-                <div className="content-right-desc">
-                  {detailDoctor?.Markdown?.description && (
-                    <span>{detailDoctor.Markdown.description}</span>
-                  )}
-                </div>
+          <div className="container intro-doctor">
+            <div
+              className="content-left"
+              style={{
+                backgroundImage: `url(${
+                  detailDoctor?.image ? detailDoctor.image : ""
+                })`,
+              }}
+            ></div>
+            <div className="content-right">
+              <div className="content-right-title">
+                {language === LANGUAGES.VI ? nameVi : nameEn}
+              </div>
+              <div className="content-right-desc">
+                {detailDoctor?.Markdown?.description && (
+                  <span>{detailDoctor.Markdown.description}</span>
+                )}
               </div>
             </div>
-            <div className="schedule-doctor"></div>
-            <div className="detail-info-doctor">
-              {detailDoctor?.Markdown?.contentHTML && (
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: detailDoctor.Markdown.contentHTML,
-                  }}
-                ></div>
-              )}
-            </div>
-            <div className="comment-doctor"></div>
           </div>
+          <div className="schedule-doctor"></div>
+          <div className="detail-info-doctor">
+            {detailDoctor?.Markdown?.contentHTML && (
+              <div
+                className="container"
+                dangerouslySetInnerHTML={{
+                  __html: detailDoctor.Markdown.contentHTML,
+                }}
+              ></div>
+            )}
+          </div>
+          <div className="comment-doctor"></div>
         </div>
       </>
     );

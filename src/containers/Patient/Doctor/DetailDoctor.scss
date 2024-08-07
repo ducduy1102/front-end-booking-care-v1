@@ -1,5 +1,5 @@
 .doctor-detail-container {
-  height: 500vh;
+  height: 100vh;
 
   .intro-doctor {
     display: flex;
@@ -35,5 +35,20 @@
   }
 
   .detail-info-doctor {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 10px;
+    background: #f9f9f9;
+    h4 {
+      font-size: 18px;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .comment-doctor {
+    height: 50px;
   }
 }
