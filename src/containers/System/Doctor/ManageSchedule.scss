@@ -26,6 +26,10 @@
       border: 1px solid black !important;
       border-radius: 4px !important;
       padding: 6px 16px !important;
+
+      &.active {
+        background-color: orange;
+      }
     }
   }
 }
