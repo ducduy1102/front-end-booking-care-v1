@@ -15,9 +15,10 @@ import { path } from "../utils";
 import Home from "../routes/Home";
 import Login from "./Auth/Login";
 import System from "../routes/System";
+import Doctor from "../routes/Doctor";
 
-import { CustomToastCloseButton } from "../components/CustomToast";
-// import ConfirmModal from "../components/ConfirmModal";
+// import { CustomToastCloseButton } from "../components/CustomToast";
+
 import "bootstrap/dist/css/bootstrap.css";
 import HomePage from "./Home/HomePage";
 import CustomScrollbars from "../components/CustomScrollbars";
@@ -59,6 +60,11 @@ class App extends Component {
                     path={path.SYSTEM}
                     component={userIsAuthenticated(System)}
                   />
+                  <Route
+                    path={"/doctor/"}
+                    component={userIsAuthenticated(Doctor)}
+                  />
+
                   <Route path={path.HOME_PAGE} component={HomePage} />
                   <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
                 </Switch>
