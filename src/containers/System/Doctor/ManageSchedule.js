@@ -134,7 +134,12 @@ class ManageSchedule extends Component {
       formattedDate: formattedDate,
     });
 
-    console.log("check res save", res);
+    if (res && res.errCode === 0) {
+      toast.success("Save info successfully!");
+    } else {
+      toast.error(res.message);
+    }
+    // console.log("check res save", res);
     // console.log("result", result);
   };
 
@@ -168,7 +173,7 @@ class ManageSchedule extends Component {
                 onChange={this.handleOnChangeDatePicker}
                 className="form-control date-picker"
                 value={this.state.currentDate[0]}
-                minDate={new Date()}
+                minDate={new Date().setHours(0, 0, 0, 0)}
               />
             </div>
           </div>

@@ -29,26 +29,42 @@ button {
       span {
         text-transform: uppercase;
         margin-left: 6px;
+        font-weight: 500;
       }
     }
 
     .time-content {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
+      .time-content-btns {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
 
-      button {
-        min-width: 150px;
-        padding: 8px 10px;
-        background-color: #fff04b;
-        border-radius: 3px;
-        font-weight: 600;
-        color: #333;
+        button {
+          min-width: 150px;
+          padding: 8px 10px;
+          background-color: #fff04b;
+          border-radius: 3px;
+          font-weight: 600;
+          color: #333;
 
-        &:hover {
-          background-color: #45c3d2;
-          color: white;
+          &:hover {
+            background-color: #45c3d2;
+            color: white;
+          }
         }
+
+        .btn-vi {
+          min-width: 120px;
+        }
+
+        .no-schedule {
+          font-style: italic;
+          font-size: 15px;
+        }
+      }
+
+      .book-free {
+        margin-top: 10px;
       }
     }
   }
