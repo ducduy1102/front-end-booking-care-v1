@@ -94,7 +94,13 @@
       "select-doctor": "Select doctor",
       "intro": "Introduction",
       "add": "Create infor",
-      "save": "Save info"
+      "save": "Save info",
+      "price": "Price",
+      "payment": "Payment",
+      "province": "Province",
+      "name-clinic": "Clinic's name",
+      "address-clinic": "Clinic's address",
+      "note": "Note"
     }
   }
 }
