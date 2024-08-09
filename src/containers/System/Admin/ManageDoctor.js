@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "./ManageDoctor.scss";
-import { fetchAllDoctors, saveDetailDoctor } from "../../../store/actions";
+import {
+  fetchAllDoctors,
+  saveDetailDoctor,
+  getRequiredDoctorInfor,
+} from "../../../store/actions";
 import { CRUD_ACTIONS, LANGUAGES } from "../../../utils";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
@@ -21,27 +25,46 @@ class ManageDoctor extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // save to markdown table
       contentMarkdown: "",
       contentHTML: "",
       selectedDoctor: null,
       description: "",
       listDoctors: [],
       hasOldData: false,
+
+      // save to doctor_infor table
+      listPrice: [],
+      listPayment: [],
+      listProvince: [],
+      selectedPrice: null,
+      selectedPayment: null,
+      selectedProvince: null,
+      nameClinic: "",
+      addressClinic: "",
+      note: "",
     };
   }
 
   async componentDidMount() {
     this.props.fetchAllDoctors();
+    this.props.getAllRequiredDoctorInfor();
   }
 
-  buildDataInputSelect = (inputData) => {
+  buildDataInputSelect = (inputData, type) => {
     let result = [];
     let { language } = this.props;
     if (inputData && inputData.length > 0) {
       inputData.forEach((item, index) => {
         let object = {};
-        let labelVi = `${item.lastName} ${item.firstName}`;
-        let labelEn = `${item.firstName} ${item.lastName}`;
+        let labelVi =
+          type === "USERS"
+            ? `${item.lastName} ${item.firstName}`
+            : item.valueVi;
+        let labelEn =
+          type === "USERS"
+            ? `${item.firstName} ${item.lastName}`
+            : item.valueEn;
 
         object.label = language === LANGUAGES.VI ? labelVi : labelEn;
         object.value = item.id;
@@ -54,7 +77,10 @@ class ManageDoctor extends Component {
 
   componentDidUpdate(preProps, prevState, snapshot) {
     if (preProps.allDoctors !== this.props.allDoctors) {
-      let dataSelect = this.buildDataInputSelect(this.props.allDoctors);
+      let dataSelect = this.buildDataInputSelect(
+        this.props.allDoctors,
+        "USERS"
+      );
       this.setState({
         listDoctors: dataSelect,
       });
@@ -65,6 +91,21 @@ class ManageDoctor extends Component {
         listDoctors: dataSelect,
       });
     }
+    if (preProps.allRequiredDoctorInfor !== this.props.allRequiredDoctorInfor) {
+      let { resPayment, resPrice, resProvince } =
+        this.props.allRequiredDoctorInfor;
+      let dataSelectPrice = this.buildDataInputSelect(resPrice);
+      let dataSelectPayment = this.buildDataInputSelect(resPayment);
+      let dataSelectProvince = this.buildDataInputSelect(resProvince);
+      console.log(dataSelectPrice, dataSelectPayment, dataSelectProvince);
+      this.setState({
+        listPrice: dataSelectPrice,
+        listPayment: dataSelectPayment,
+        listProvince: dataSelectProvince,
+      });
+
+      console.log("allRequiredDoctorInfor", this.props.allRequiredDoctorInfor);
+    }
   }
 
   handleEditorChange = ({ html, text }) => {
@@ -72,7 +113,6 @@ class ManageDoctor extends Component {
       contentMarkdown: text,
       contentHTML: html,
     });
-    // console.log("handleEditorChange", html, text);
   };
 
   handleOnChangeDesc = (event) => {
@@ -121,19 +161,24 @@ class ManageDoctor extends Component {
       <div className="manage-doctor-container">
         <div className="container">
           <div className="manage-doctor-title">
-            Tạo thông tin chi tiết bác sĩ
+            <FormattedMessage id="admin.manage-doctor.title" />
           </div>
-          <div className="intro-info">
+          <div className="intro-infor">
             <div className="content-left">
-              <label htmlFor="doctor">Chọn bác sĩ</label>
+              <label className="label">
+                <FormattedMessage id="admin.manage-doctor.select-doctor" />
+              </label>
               <Select
+                placeholder="Chọn bác sĩ"
                 value={this.state.selectedDoctor}
                 onChange={this.handleChange}
                 options={this.state.listDoctors}
               />
             </div>
             <div className="content-right">
-              <label htmlFor="content-right">Thông tin giới thiệu</label>
+              <label className="label" htmlFor="content-right">
+                <FormattedMessage id="admin.manage-doctor.intro" />
+              </label>
               <textarea
                 className="form-control"
                 name=""
@@ -142,6 +187,61 @@ class ManageDoctor extends Component {
                 onChange={(e) => this.handleOnChangeDesc(e)}
                 value={this.state.description}
               ></textarea>
+            </div>
+          </div>
+          <div className="more-infor-extra">
+            <div className="row">
+              <div className="col-4 infor-child-block">
+                <label className="label" htmlFor="">
+                  Chọn giá
+                </label>
+                <Select
+                  placeholder="Chọn giá"
+                  // value={this.state.selectedDoctor}
+                  // onChange={this.handleChange}
+                  options={this.state.listPrice}
+                />
+              </div>
+              <div className="col-4 infor-child-block">
+                <label className="label" htmlFor="">
+                  Chọn phương thức thanh toán
+                </label>
+                <Select
+                  placeholder="Chọn phương thức thanh toán"
+                  // value={this.state.selectedDoctor}
+                  // onChange={this.handleChange}
+                  options={this.state.listPayment}
+                />
+              </div>
+              <div className="col-4 infor-child-block">
+                <label className="label" htmlFor="">
+                  Chọn tỉnh/thành
+                </label>
+                <Select
+                  placeholder="Chọn tỉnh/thành"
+                  // value={this.state.selectedDoctor}
+                  // onChange={this.handleChange}
+                  options={this.state.listProvince}
+                />
+              </div>
+              <div className="col-4 infor-child-block">
+                <label className="label" htmlFor="">
+                  Tên phòng khám
+                </label>
+                <input type="text" className="form-control" ame="" id="" />
+              </div>
+              <div className="col-4 infor-child-block">
+                <label className="label" htmlFor="">
+                  Địa chỉ phòng khám
+                </label>
+                <input type="text" className="form-control" ame="" id="" />
+              </div>
+              <div className="col-4 infor-child-block">
+                <label className="label" htmlFor="">
+                  Note
+                </label>
+                <input type="text" className="form-control" ame="" id="" />
+              </div>
             </div>
           </div>
           <div className="manage-doctor-editor">
@@ -159,9 +259,13 @@ class ManageDoctor extends Component {
             onClick={() => this.handleSaveContentMarkdown()}
           >
             {hasOldData ? (
-              <span>Lưu thông tin</span>
+              <span>
+                <FormattedMessage id="admin.manage-doctor.save" />
+              </span>
             ) : (
-              <span>Tạo thông tin</span>
+              <span>
+                <FormattedMessage id="admin.manage-doctor.add" />
+              </span>
             )}
           </button>
         </div>
@@ -174,12 +278,14 @@ const mapStateToProps = (state) => {
   return {
     allDoctors: state.admin.allDoctors,
     language: state.app.language,
+    allRequiredDoctorInfor: state.admin.allRequiredDoctorInfor,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAllDoctors: () => dispatch(fetchAllDoctors()),
+    getAllRequiredDoctorInfor: () => dispatch(getRequiredDoctorInfor()),
     saveDetailDoctor: (data) => dispatch(saveDetailDoctor(data)),
   };
 };
