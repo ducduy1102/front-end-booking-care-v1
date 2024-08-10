@@ -151,23 +151,56 @@ class ManageDoctor extends Component {
     this.setState({
       ...stateCopy,
     });
-    // console.log(stateCopy);
-    // this.setState({
-    //   description: event.target.value,
-    // });
   };
 
   handleChange = async (selectedDoctor) => {
+    console.log("selecteddoctor0", selectedDoctor);
+    console.log("selectedPrice0", this.state.selectedPrice);
+    console.log("selectedPayment0", this.state.selectedPayment);
+    console.log("selectedProvince0", this.state.selectedProvince);
     this.setState({ selectedDoctor });
     let res = await getDetailInforDoctorService(selectedDoctor.value);
     // console.log(`Option selected:`, res);
+    let { listPrice, listPayment, listProvince } = this.state;
     if (res && res.errCode === 0 && res?.data?.Markdown) {
       let markdown = res.data.Markdown;
+      let addressClinic = "",
+        nameClinic = "",
+        note = "",
+        priceId = "",
+        provinceId = "",
+        paymentId = "",
+        selectedPayment = "",
+        selectedPrice = "",
+        selectedProvince = "";
+
+      if (res?.data?.Doctor_Infor) {
+        let doctor_infor = res.data.Doctor_Infor;
+        addressClinic = doctor_infor.addressClinic;
+        nameClinic = doctor_infor.nameClinic;
+        note = doctor_infor.note;
+        priceId = doctor_infor.priceId;
+        paymentId = doctor_infor.paymentId;
+        provinceId = doctor_infor.provinceId;
+
+        selectedPayment = listPayment.find((item) => item.value === paymentId);
+        selectedPrice = listPrice.find((item) => item.value === priceId);
+        selectedProvince = listProvince.find(
+          (item) => item.value === provinceId
+        );
+      }
+
       this.setState({
         contentHTML: markdown.contentHTML,
         contentMarkdown: markdown.contentMarkdown,
         description: markdown.description,
         hasOldData: true,
+        addressClinic: addressClinic,
+        nameClinic: nameClinic,
+        note: note,
+        selectedPrice: selectedPrice,
+        selectedPayment: selectedPayment,
+        selectedProvince: selectedProvince,
       });
     } else {
       this.setState({
@@ -208,6 +241,11 @@ class ManageDoctor extends Component {
   render() {
     let { hasOldData } = this.state;
     // console.log(this.state);
+
+    console.log("selecteddoctor4", this.state.selectedDoctor);
+    console.log("selectedPrice4", this.state.selectedPrice);
+    console.log("selectedPayment4", this.state.selectedPayment);
+    console.log("selectedProvince4", this.state.selectedProvince);
     return (
       <div className="manage-doctor-container">
         <div className="container">
