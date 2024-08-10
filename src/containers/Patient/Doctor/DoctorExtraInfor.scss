@@ -18,14 +18,21 @@
 
   .content-down {
     .short-infor {
-      span {
+      margin-top: 10px;
+      text-transform: uppercase;
+
+      .detail {
         cursor: pointer;
         color: #49c4d3;
+      }
+
+      .currency {
+        margin: 0 5px;
       }
     }
 
     .title-price {
-      margin-bottom: 8px;
+      margin: 10px 0 8px 0;
     }
 
     .up-container {
