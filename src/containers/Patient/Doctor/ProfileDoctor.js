@@ -5,6 +5,8 @@ import { FormattedMessage } from "react-intl";
 import "./ProfileDoctor.scss";
 import { getProfileDoctorByIdService } from "../../../services/userService";
 import NumberFormat from "react-number-format";
+import _ from "lodash";
+import moment from "moment";
 
 class ProfileDoctor extends Component {
   constructor(props) {
@@ -36,9 +38,40 @@ class ProfileDoctor extends Component {
     }
   }
 
-  render() {
-    // console.log("state", this.state);
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  renderBookingModal(dataTime) {
     let { language } = this.props;
+
+    if (dataTime && !_.isEmpty(dataTime)) {
+      let time =
+        language === LANGUAGES.VI
+          ? dataTime.timeTypeData.valueVi
+          : dataTime.timeTypeData.valueEn;
+      let date =
+        language === LANGUAGES.VI
+          ? moment.unix(+dataTime.date / 1000).format("dddd - DD/MM/YYYY")
+          : moment
+              .unix(+dataTime.date / 1000)
+              .locale("en")
+              .format("ddd - MM/DD/YYYY");
+      date = this.capitalizeFirstLetter(date);
+      return (
+        <>
+          <div className="">
+            {time} &nbsp; {date}
+          </div>
+          <div className="">Miễn phí đặt lịch</div>
+        </>
+      );
+    }
+    return <></>;
+  }
+
+  render() {
+    let { language, isShowDescriptionDoctor, dataTime } = this.props;
     let { dataProfile } = this.state;
     let nameVi = "";
     let nameEn = "";
@@ -62,8 +95,14 @@ class ProfileDoctor extends Component {
               {language === LANGUAGES.VI ? nameVi : nameEn}
             </div>
             <div className="content-right-desc">
-              {dataProfile?.Markdown?.description && (
-                <span>{dataProfile.Markdown.description}</span>
+              {isShowDescriptionDoctor ? (
+                <>
+                  {dataProfile?.Markdown?.description && (
+                    <span>{dataProfile.Markdown.description}</span>
+                  )}
+                </>
+              ) : (
+                <>{this.renderBookingModal(dataTime)}</>
               )}
             </div>
           </div>
