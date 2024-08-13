@@ -114,7 +114,9 @@ class TableManageUser extends Component {
                           <td>
                             {gender && this.props.language === LANGUAGES.VI
                               ? gender.valueVi
-                              : gender.valueEn}
+                              : gender && this.props.language === LANGUAGES.EN
+                              ? gender.valueEn
+                              : ""}
                           </td>
                           <td>{item.phoneNumber}</td>
                           <td>
@@ -125,7 +127,9 @@ class TableManageUser extends Component {
                           <td>
                             {position && this.props.language === LANGUAGES.VI
                               ? position.valueVi
-                              : position.valueEn}
+                              : position && this.props.language === LANGUAGES.VI
+                              ? position.valueEn
+                              : ""}
                           </td>
                           <td>
                             <button
