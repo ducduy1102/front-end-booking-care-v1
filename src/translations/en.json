@@ -101,7 +101,7 @@
       "phoneNumber": "Phone number",
       "email": "Email",
       "address": "Address",
-      "reason": "Reason",
+      "reason": "Reason for examination",
       "birthday": "Birthday",
       "gender": "Gender",
       "selectGender": "Select...",
