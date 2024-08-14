@@ -76,7 +76,8 @@
     "title": "Quản lý kế hoạch khám bệnh của bác sĩ",
     "choose-doctor": "Chọn bác sĩ",
     "choose-date": "Chọn ngày",
-    "save": "Lưu thông tin"
+    "save": "Lưu thông tin",
+    "selectDoctor": "------Chọn------"
   },
 
   "patient": {
@@ -109,6 +110,11 @@
       "btnCancel": "Hủy",
       "priceBooking": "Miễn phí đặt lịch!",
       "price": "Giá khám"
+    },
+
+    "verify-email": {
+      "success": "Xác nhận lịch hẹn thành công!",
+      "failed": "Lịch hẹn không tồn tại hoặc đã được xác nhận!"
     }
   },
 

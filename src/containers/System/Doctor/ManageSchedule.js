@@ -160,6 +160,9 @@ class ManageSchedule extends Component {
                 <FormattedMessage id="manage-schedule.choose-doctor" />
               </label>
               <Select
+                placeholder={
+                  <FormattedMessage id="manage-schedule.selectDoctor" />
+                }
                 value={this.state.selectedDoctor}
                 onChange={this.handleChange}
                 options={this.state.listDoctors}
