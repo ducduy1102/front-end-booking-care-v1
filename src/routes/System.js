@@ -6,9 +6,9 @@ import UserRedux from "../containers/System/Admin/UserRedux";
 import Header from "../containers/Header/Header";
 import ManageDoctor from "../containers/System/Admin/ManageDoctor";
 import UserAdmin from "../containers/System/UserAdmin";
-import ManageClinic from "../containers/System/ManageClinic";
-import ManageSpecialty from "../containers/System/ManageSpecialty";
-import ManageHandbook from "../containers/System/ManageHandbook";
+import ManageClinic from "../containers/System/Clinic/ManageClinic";
+import ManageSpecialty from "../containers/System/Specialty/ManageSpecialty";
+import ManageHandbook from "../containers/System/Handbook/ManageHandbook";
 
 class System extends Component {
   render() {
