@@ -3,13 +3,14 @@
 
   .description-specialty {
     margin: 20px 0;
-    border: 1px solid red;
-    height: 200px;
   }
 
   .child-doctor-container {
     background: #eee;
     padding: 10px 0;
+
+    .search-specialty-doctor {
+    }
 
     .child-doctor {
       display: flex;
