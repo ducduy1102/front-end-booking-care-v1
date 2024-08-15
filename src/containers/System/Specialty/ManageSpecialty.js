@@ -52,6 +52,12 @@ class ManageSpecialty extends Component {
     let res = await createNewSpecialtyService(this.state);
     if (res && res.errCode === 0) {
       toast.success(res.message);
+      this.setState({
+        name: "",
+        imageBase64: "",
+        descriptionHTML: "",
+        descriptionMarkdown: "",
+      });
     } else {
       toast.error(res.message);
     }
@@ -60,11 +66,13 @@ class ManageSpecialty extends Component {
   render() {
     return (
       <div className="container manage-specialty-container">
-        <div className="manage-specialty-title">Manage Specialty</div>
+        <div className="manage-specialty-title">
+          <FormattedMessage id="manage-specialty.title" />
+        </div>
         <div className="add-new-specialty row g-3">
           <div className="col-6">
             <label htmlFor="name" className="form-label">
-              Tên chuyên khoa
+              <FormattedMessage id="manage-specialty.name" />
             </label>
             <input
               type="text"
@@ -76,7 +84,7 @@ class ManageSpecialty extends Component {
           </div>
           <div className="col-6">
             <label htmlFor="" className="form-label">
-              Tên chuyên khoa
+              <FormattedMessage id="manage-specialty.image" />
             </label>
             <input
               type="file"
@@ -97,7 +105,7 @@ class ManageSpecialty extends Component {
               className="btn-save-specialty"
               onClick={() => this.handleSaveNewSpecialty()}
             >
-              Save
+              <FormattedMessage id="manage-specialty.btn-save" />
             </button>
           </div>
         </div>
