@@ -7,13 +7,6 @@
     font-weight: 700;
   }
 
-  .intro-infor,
-  .more-infor-extra {
-    .label {
-      margin-bottom: 5px;
-    }
-  }
-
   .intro-infor {
     display: flex;
     gap: 30px;
@@ -30,10 +23,6 @@
 
   .more-infor-extra {
     margin-bottom: 20px;
-
-    .infor-child-block {
-      margin-top: 12px;
-    }
   }
 
   .create-content-doctor,
