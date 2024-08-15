@@ -14,7 +14,18 @@ class DoctorExtraInfor extends Component {
       extraInfor: {},
     };
   }
-  async componentDidMount() {}
+  async componentDidMount() {
+    if (this.props.doctorIdFromParent) {
+      let res = await getExtraInforDoctorByIdService(
+        this.props.doctorIdFromParent
+      );
+      if (res && res.errCode === 0) {
+        this.setState({
+          extraInfor: res.data,
+        });
+      }
+    }
+  }
 
   async componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.language !== prevProps.language) {
@@ -41,6 +52,8 @@ class DoctorExtraInfor extends Component {
     let { isShowDetailInfor, extraInfor } = this.state;
     let { language } = this.props;
 
+    console.log("this.state", this.state);
+
     return (
       <div className="doctor-extra-infor-container">
         <div className="content-up">
@@ -48,7 +61,9 @@ class DoctorExtraInfor extends Component {
             <FormattedMessage id="patient.extra-infor-doctor.text-address" />
           </div>
           <div className="name-clinic">{extraInfor?.nameClinic || ""}</div>
-          <div className="detail-address">{extraInfor?.adressClinic || ""}</div>
+          <div className="detail-address">
+            {extraInfor?.addressClinic || ""}
+          </div>
         </div>
         <div className="content-down">
           {!isShowDetailInfor ? (
