@@ -143,5 +143,13 @@
     "name": "Name of specialty",
     "image": "Image",
     "btn-save": "Save"
+  },
+
+  "manage-clinic": {
+    "title": "Manage clinic",
+    "name": "Name of clinic",
+    "address": "Address of clinic",
+    "image": "Image",
+    "btn-save": "Save"
   }
 }

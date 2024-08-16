@@ -1,0 +1,24 @@
+button {
+  border: none;
+  outline: none;
+}
+
+.manage-clinic-container {
+  .manage-clinic-title {
+    margin: 16px 0;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .add-new-clinic {
+    .btn-save-clinic {
+      min-width: 70px;
+      padding: 8px 5px;
+      border-radius: 4px;
+      background: orange;
+      // float: right;
+    }
+  }
+}

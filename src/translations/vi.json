@@ -143,5 +143,13 @@
     "name": "Tên chuyên khoa",
     "image": "Ảnh chuyên khoa",
     "btn-save": "Tạo mới"
+  },
+
+  "manage-clinic": {
+    "title": "Quản lý phòng khám",
+    "name": "Tên phòng khám",
+    "address": "Địa chỉ phòng khám",
+    "image": "Ảnh phòng khám",
+    "btn-save": "Tạo mới"
   }
 }
