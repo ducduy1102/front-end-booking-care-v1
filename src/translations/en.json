@@ -110,7 +110,8 @@
       "btnConfirm": "Confirm",
       "btnCancel": "Cancel",
       "priceBooking": "Free appointment!",
-      "price": "Price"
+      "price": "Price",
+      "see-more": "See more"
     },
 
     "verify-email": {
