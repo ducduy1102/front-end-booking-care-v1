@@ -9,5 +9,19 @@
   }
 
   .table-manage-patient {
+    button {
+      cursor: pointer;
+      margin-right: 10px;
+      height: 30px;
+      border-radius: 4px;
+    }
+
+    .btn-confirm {
+      background-color: orange;
+    }
+
+    .btn-send-invoice {
+      background-color: rgb(16, 131, 16);
+    }
   }
 }

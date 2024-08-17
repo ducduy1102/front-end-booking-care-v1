@@ -84,7 +84,13 @@
   },
 
   "manage-patient": {
-    "title": "Managing medical examination patients"
+    "title": "Managing medical examination patients",
+    "select-date": "Select date",
+    "fullname": "Full name",
+    "time": "Time",
+    "confirm": "Confirm",
+    "send": "Send invoice",
+    "not-found-patient": "There are no patients scheduled for examination today"
   },
 
   "patient": {

@@ -109,7 +109,6 @@ class DoctorSchedule extends Component {
   };
 
   handleScheduleTime = (time) => {
-    console.log(time);
     this.setState({
       isOpenModalBooking: true,
       dataScheduleTimeModal: time,

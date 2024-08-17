@@ -84,7 +84,13 @@
   },
 
   "manage-patient": {
-    "title": "Quản lý bệnh nhân khám bệnh"
+    "title": "Quản lý bệnh nhân khám bệnh",
+    "select-date": "Chọn ngày khám",
+    "fullname": "Họ và tên",
+    "time": "Thời gian",
+    "confirm": "Xác nhận",
+    "send": "Gửi hóa đơn",
+    "not-found-patient": "Không có bệnh nhân đặt lịch trong ngày hôm nay"
   },
 
   "patient": {
