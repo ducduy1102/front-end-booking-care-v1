@@ -109,18 +109,6 @@ class App extends Component {
               theme="light"
             />
             <ToastContainer />
-
-            {/* <ToastContainer
-              position="top-right"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            /> */}
           </div>
         </Router>
       </Fragment>

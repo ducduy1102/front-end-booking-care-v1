@@ -90,7 +90,15 @@
     "time": "Time",
     "confirm": "Confirm",
     "send": "Send invoice",
-    "not-found-patient": "There are no patients scheduled for examination today"
+    "cancel": "Cancel appointment",
+    "not-found-patient": "There are no patients scheduled for examination today",
+    "remedy-modal": {
+      "title": "Send prescription",
+      "patient-email": "Patient email",
+      "select-remedy": "Select prescription file",
+      "send": "Send",
+      "cancel": "Cancel"
+    }
   },
 
   "patient": {

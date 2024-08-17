@@ -89,8 +89,15 @@
     "fullname": "Họ và tên",
     "time": "Thời gian",
     "confirm": "Xác nhận",
-    "send": "Gửi hóa đơn",
-    "not-found-patient": "Không có bệnh nhân đặt lịch trong ngày hôm nay"
+    "cancel": "Hủy lịch hẹn",
+    "not-found-patient": "Không có bệnh nhân đặt lịch trong ngày hôm nay",
+    "remedy-modal": {
+      "title": "Gửi hóa đơn khám bệnh thành công",
+      "patient-email": "Email bệnh nhân",
+      "select-remedy": "Chọn file đơn thuốc",
+      "send": "Gửi",
+      "cancel": "Hủy"
+    }
   },
 
   "patient": {

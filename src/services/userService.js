@@ -100,6 +100,10 @@ const getAllPatientForDoctorService = (data) => {
   );
 };
 
+const postSendRemedyService = (data) => {
+  return axios.post(`/api/send-remedy`, data);
+};
+
 export {
   handleLogin,
   getAllUsers,
@@ -124,4 +128,5 @@ export {
   getAllClinicService,
   getDetailClinicByIdService,
   getAllPatientForDoctorService,
+  postSendRemedyService,
 };
