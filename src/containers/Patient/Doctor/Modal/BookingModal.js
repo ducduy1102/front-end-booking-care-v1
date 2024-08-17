@@ -31,6 +31,7 @@ class BookingModal extends Component {
   }
   async componentDidMount() {
     this.props.fetchGender();
+    console.log(this.props.dataTime);
   }
 
   buildDataGender = (data) => {

@@ -45,7 +45,8 @@
       "manage-handbook": "Manage Handbook"
     },
     "doctor": {
-      "manage-schedule": "Manage Doctor's schedule"
+      "manage-schedule": "Manage Doctor's schedule",
+      "manage-patient": "Manage Doctor's patient"
     }
   },
 
@@ -80,6 +81,10 @@
     "choose-date": "Choose date",
     "save": "Save information",
     "selectDoctor": "------Select------"
+  },
+
+  "manage-patient": {
+    "title": "Managing medical examination patients"
   },
 
   "patient": {

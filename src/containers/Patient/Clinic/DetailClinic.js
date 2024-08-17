@@ -56,9 +56,9 @@ class DetailClinic extends Component {
     let { language } = this.props;
     console.log("check state", this.state);
     return (
-      <div className="detail-specialty-container">
+      <div className="detail-clinic-container">
         <HomeHeader isShowBanner={false} />
-        <div className="description-specialty">
+        <div className="description-clinic">
           <div className="container">
             {dataDetailClinic && !_.isEmpty(dataDetailClinic) && (
               <>

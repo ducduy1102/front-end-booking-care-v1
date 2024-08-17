@@ -45,7 +45,8 @@
       "manage-handbook": "Quản lý Cẩm nang"
     },
     "doctor": {
-      "manage-schedule": "Quản lý kế hoạch khám bệnh"
+      "manage-schedule": "Quản lý kế hoạch khám bệnh",
+      "manage-patient": "Quản lý bệnh nhân khám bệnh"
     }
   },
 
@@ -80,6 +81,10 @@
     "choose-date": "Chọn ngày",
     "save": "Lưu thông tin",
     "selectDoctor": "------Chọn------"
+  },
+
+  "manage-patient": {
+    "title": "Quản lý bệnh nhân khám bệnh"
   },
 
   "patient": {
