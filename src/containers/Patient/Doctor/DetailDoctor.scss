@@ -25,11 +25,15 @@
       .content-right-title {
         text-align: start;
         font-size: 20px;
-        font-weight: 700;
+        font-weight: 600;
       }
 
       .content-right-desc {
         padding-top: 8px;
+
+        .like-share-plugin {
+          margin: 10px 0 20px 0;
+        }
       }
     }
   }
@@ -63,6 +67,7 @@
   }
 
   .comment-doctor {
-    height: 50px;
+    // height: 50px;
+    padding: 10px 100px;
   }
 }
