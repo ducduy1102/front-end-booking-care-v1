@@ -9,7 +9,7 @@ class About extends Component {
       <div className="section-share section-about">
         <div className="container">
           <div className="section-about-header">
-            Truyền thông nói gì về Đức Duy?
+            What does the media say about BookingCare?
           </div>
           <div className="section-about-content">
             <div className="content-left">
