@@ -45,7 +45,6 @@ class ManageDoctor extends Component {
       selectedProvince: "",
       selectedClinic: "",
       selectedSpecialty: "",
-      selectedClinic: "",
 
       nameClinic: "",
       addressClinic: "",
@@ -191,13 +190,8 @@ class ManageDoctor extends Component {
   };
 
   handleChange = async (selectedDoctor) => {
-    // console.log("selecteddoctor0", selectedDoctor);
-    // console.log("selectedPrice0", this.state.selectedPrice);
-    // console.log("selectedPayment0", this.state.selectedPayment);
-    // console.log("selectedProvince0", this.state.selectedProvince);
     this.setState({ selectedDoctor });
     let res = await getDetailInforDoctorService(selectedDoctor.value);
-    // console.log(`Option selected:`, res);
     let { listPrice, listPayment, listProvince, listSpecialty, listClinic } =
       this.state;
     if (res && res.errCode === 0 && res?.data?.Markdown) {
